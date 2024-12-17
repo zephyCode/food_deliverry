@@ -1,0 +1,34 @@
+# Global ignores (common to both frontend and backend)
+node_modules/
+*.log
+.env
+.DS_Store
+Thumbs.db
+package-lock.json
+
+# Frontend specific ignores
+/frontend/node_modules/
+frontend/build/
+frontend/dist/
+frontend/.env
+frontend/.next/
+frontend/.nuxt/
+frontend/public/assets/
+frontend/coverage/
+frontend/src/assets/
+
+# Backend specific ignores
+/backend/node_modules/
+backend/build/
+backend/.env
+backend/coverage/
+backend/storage/
+
+# IDE specific ignores
+.vscode/
+.idea/
+*.iml
+
+# OS generated files
+*.swp
+*.swo
