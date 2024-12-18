@@ -32,3 +32,6 @@ backend/storage/
 # OS generated files
 *.swp
 *.swo
+
+# My files
+cred.txt
