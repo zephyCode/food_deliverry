@@ -3,6 +3,25 @@ const {validationResult} = require('express-validator');
 const HttpError = require('../models/http-errors');
 const User = require('../models/user');
 
+const getUserProfile = async(req,res,next) => {
+    const userId = req.params.userId;
+    let userProfile
+    try {
+        userProfile = await User.findOne({_id: userId}, ['-_id']);
+    }
+    catch(err) {
+        return next(
+            new HttpError(
+                'No user profile found!',
+                404
+            )
+        );
+    }
+    res.status(200).json({
+        user: userProfile
+    });
+}
+
 const signup = async(req,res,next) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
@@ -119,5 +138,50 @@ const login = async(req,res,next) => {
     );
 }
 
+const updateUserProfile = async (req,res,next) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        return next(
+            new HttpError(
+                'Sorry cannot process the input!',
+                422
+            )
+        );
+    }
+    const userId = req.params.userId;
+    let user;
+    try {
+        user = await User.findById(userId);
+    }
+    catch(err) {
+        return next(
+            new HttpError(
+                'Cannot find the user with the id requested!',
+                404
+            )
+        );
+    }
+    const {name, email, password} = req.body;
+    user.name = name;
+    user.email = email;
+    user.password = password;
+    try {
+        await user.save();
+    }
+    catch(err) {
+        return next(
+            new HttpError(
+                'Failed to update the user!',
+                500
+            )
+        );
+    }
+    res.status(200).json({
+        user: user
+    });
+}
+
 exports.signup = signup;
 exports.login = login;
+exports.getUserProfile = getUserProfile;
+exports.updateUserProfile = updateUserProfile;

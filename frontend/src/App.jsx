@@ -8,6 +8,7 @@ import PlaceOrder from './pages/PlaceOrder/PlaceOrder';
 import Footer from './components/Footer/Footer';
 import LoginPopup from './components/LoginPopup/LoginPopup';
 import {AuthContext} from './context/auth-context';
+import UserSettings from './pages/UserSttings/UserSettings';
 
 const App = () => {
 
@@ -44,6 +45,7 @@ const App = () => {
         <Route path='/' element={<Home/>}/>  
         <Route path='/cart' element={<Cart/>}/>  
         <Route path='/order' element={<PlaceOrder/>}/>
+        <Route path={`/settings/${userId}`} element={<UserSettings/>}/>
         <Route path='*' element={<Navigate to='/'/>}/>
       </Routes>
     );

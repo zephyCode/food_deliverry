@@ -3,6 +3,7 @@ import { assets } from '../../assets/assets'
 import { Link } from 'react-router-dom';
 import { StoreContext } from '../../context/StoreContext';
 import { AuthContext } from '../../context/auth-context';
+import Avatar from '../Avatar/Avatar';
 import './Navbar.css'
 
 const Navbar = ({setShowLogin}) => {
@@ -30,7 +31,9 @@ const Navbar = ({setShowLogin}) => {
         <a href='#footer' onClick={()=>setMenu("contact-us")} className={menu === "contact-us" ? "active" : ""}>contact-us</a>
       </ul>
       <div className="navbar-right">
-        <img src={assets.search_icon} alt="" />
+        <Link to={`/settings/${auth.userId}`} className='navbar-profile__image'>
+          {auth.isLoggedIn && <Avatar image='/tomato.jpg' alt='tomato'/>}
+        </Link>
         {auth.isLoggedIn && <div className="navbar-search-icon">
           <Link to='/cart'>
             <img src={assets.basket_icon} alt="" />

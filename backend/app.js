@@ -19,7 +19,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api/user/auth', userRoutes);
+app.use('/api/user', userRoutes);
 app.use('/api/order/new', orderRoutes);
 app.use('/api/user', location);
 

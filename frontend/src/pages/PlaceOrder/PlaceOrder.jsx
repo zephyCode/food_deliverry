@@ -10,9 +10,6 @@ const PlaceOrder = () => {
   const auth = useContext(AuthContext);
 
   const [formState, setFormState] = useState({
-    firstName: { value: '', isValid: false },
-    lastName: { value: '', isValid: false },
-    email: { value: '', isValid: false },
     street: { value: '', isValid: false },
     city: { value: '', isValid: false },
     state: { value: '', isValid: false },
@@ -53,9 +50,6 @@ const PlaceOrder = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            firstName: formState.firstName.value,
-            lastName: formState.lastName.value,
-            email: formState.email.value,
             street: formState.street.value,
             city: formState.city.value,
             state: formState.state.value,
@@ -93,38 +87,12 @@ const PlaceOrder = () => {
         <div className="multi-fields">
           <input
             type="text"
-            placeholder="First name"
-            value={formState.firstName.value}
+            placeholder="Street"
+            value={formState.street.value}
             onChange={(e) =>
-              inputHandler('firstName', e.target.value, e.target.value.trim() !== '')
+              inputHandler('street', e.target.value, e.target.value.trim() !== '')
             }
           />
-          <input
-            type="text"
-            placeholder="Last name"
-            value={formState.lastName.value}
-            onChange={(e) =>
-              inputHandler('lastName', e.target.value, e.target.value.trim() !== '')
-            }
-          />
-        </div>
-        <input
-          type="email"
-          placeholder="Email address"
-          value={formState.email.value}
-          onChange={(e) =>
-            inputHandler('email', e.target.value, /\S+@\S+\.\S+/.test(e.target.value))
-          }
-        />
-        <input
-          type="text"
-          placeholder="Street"
-          value={formState.street.value}
-          onChange={(e) =>
-            inputHandler('street', e.target.value, e.target.value.trim() !== '')
-          }
-        />
-        <div className="multi-fields">
           <input
             type="text"
             placeholder="City"

@@ -5,8 +5,35 @@ const User = require('../models/user');
 const HttpError = require('../models/http-errors');
 
 const placeOrder = async(req,res,next) => {
-    const {firstName, lastName, email, street, city, state, zip, country, phone, items} = req.body;
+    const {street, city, state, zip, country, phone, items} = req.body;
     const userId = req.params.uid;
+    let accEmail;
+    let accName;
+    try {
+        accEmail = await User.findOne({_id: userId}, 'email');
+    }
+    catch(err) {
+        return next(
+            new HttpError(
+                'No account email found!', 
+                404
+            )
+        );
+    }
+    try {
+        accName = await User.findOne({_id: userId}, 'name');
+    }
+    catch(err) {
+        return next(
+            new HttpError(
+                'No account name found!', 
+                404
+            )
+        );
+    }
+    let email = accEmail ? accEmail.email : "";
+    let name = accName ? accName.name : "";
+
     const totalAmount = items.reduce((sum,item) => {
         if(!item.price || !item.quantity) {
             return next(
@@ -17,10 +44,9 @@ const placeOrder = async(req,res,next) => {
             )
         }
         return sum + item.price * item.quantity;
-    }, 0)
+    }, 0);
     const placedOrder = new Order({
-        firstName,
-        lastName,
+        name,
         email,
         street,
         city,

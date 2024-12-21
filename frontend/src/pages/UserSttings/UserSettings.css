@@ -1,0 +1,132 @@
+.settings-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 2rem;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.user-settings__container-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-left: 1rem;
+    padding-top: 2rem;
+    width: 300px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.user-settings__image {
+    position: relative;
+    width: 15rem;
+    height: 15rem;
+    overflow: hidden;
+}
+
+.user-settings__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: fit-content;
+    text-align: left;
+}
+
+.user-settings__list-item {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 1rem;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.user-settings__list-item.selected {
+    background-color: #e2e2e2;
+    color: tomato;
+}
+
+.user-settings__list-item:hover {
+    color: tomato;
+}
+
+.user-settings__button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+    font-size: 14px;
+    width: 60%;
+    color: black;
+    border: 1px solid tomato;
+    padding: 10px 30px;
+    border-radius: 50px;
+}
+
+.user-settings__image:hover .user-settings__button {
+    opacity: 1;
+}
+
+.vertical-line {
+    height: 100%;
+    background-color: #e2e2e2;
+    width: 1px;
+}
+
+.user-settings__container-right {
+    flex: 1;
+    padding: 2rem;
+    height: 100%;
+    overflow-y: auto;
+}
+
+@media (max-width: 1050px) {
+    .user-settings__image {
+        width: 10rem;
+        height: 10rem;
+    }
+    .user-settings__button {
+        width: 80%;
+        font-size: 10px;
+    }
+    .user-settings__container-left {
+        width: 180px;
+    }
+}
+
+@media (max-width: 900px) {
+    .user-settings__image {
+        width: 8rem;
+        height: 8rem;
+    }
+    .user-settings__button {
+        width: 70%;
+        font-size: 9px;
+    }
+    .user-settings__container-left {
+        width: 150px;
+    }
+}
+
+@media (max-width: 750px) {
+    .user-settings__image {
+        width: 6rem;
+        height: 6rem;
+    }
+    .user-settings__button {
+        width: 60%;
+        font-size: 8px;
+    }
+    .user-settings__container-left {
+        width: 100px;
+    }
+}
